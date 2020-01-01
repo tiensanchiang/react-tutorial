@@ -4,10 +4,13 @@ export default class TodoCreator extends React.Component {
 
     constructor(props) {
 	super(props)
+	console.log(props)
 	this.state = { newItemText: "" }
     }
 
     updateNewTextValue = (event)=>{
+	//	console.log(event)
+	console.log(event)
 	this.setState({ newItemText : event.target.value })
     }
 

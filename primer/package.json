@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "primer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -12,8 +12,7 @@
     "react-scripts": "3.3.0"
   },
   "scripts": {
-      "start": "react-scripts start",
-      "startbg": "react-scripts start 1>/dev/null 2>&1 &",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

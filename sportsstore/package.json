@@ -23,9 +23,9 @@
     "reactstart": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-      "eject": "react-scripts eject",
-      "start": "npm-run-all --parallel reactstart webservice",
-      "webservice": "node server.js"
+    "eject": "react-scripts eject",
+    "start": "npm-run-all --parallel reactstart webservice",
+    "webservice": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

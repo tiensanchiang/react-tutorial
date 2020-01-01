@@ -17,7 +17,7 @@ export default class App extends React.Component{
 		<Router>
 		    <Switch>
 			<Route  path="/shop" component={ ShopConnector } />
-			{/*<Redirect to="/shop"/>*/}
+			<Redirect to="/shop"/>
 		    </Switch>
 		</Router>
 	    </Provider>

@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 
 export class CartDetailsRows extends React.Component{
 
@@ -25,7 +25,7 @@ export class CartDetailsRows extends React.Component{
 		    <td> ${ (item.quantity * item.product.price).toFixed(2) } </td>
 		    <td>
 			<button className="btn btn-sm btn-danger"
-				onClick={()=>this.props.removeFromCart(item.product)}>
+				onClick={()=>this.props.removeFromCart(item)}>
 			    Remove
 			</button>
 		    </td>

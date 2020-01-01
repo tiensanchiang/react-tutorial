@@ -1,10 +1,25 @@
 import {ActionTypes} from "./Types"
-import {data as phData} from "./placeholderData"
+//import {data as phData} from "./placeholderData"
+import { RestDataSource } from "./RestDataSource"
 
-export const loadData = (dataType) => ({
+let dataSource = new RestDataSource();
+
+
+export const loadData = (dataType, params) => ({
     type: ActionTypes.DATA_LOAD,
-    payload: {
-	dataType: dataType,
-	data: phData[dataType]
-    }
+    payload: dataSource.GetData(dataType,params)
+	.then(response=>({
+	    dataType,
+	    data:response.data,
+	    total: Number(response.headers['x-total-count']),
+	    params
+	}))
 });
+
+export const setPageSize = (newSize) => {
+    return ({ type: ActionTypes.DATA_SET_PAGESIZE, payload: newSize });
+}
+
+export const setSortProperty = (newProp) => {
+    return ({ type: ActionTypes.DATA_SET_SORT_PROPERTY, payload: newProp});
+}

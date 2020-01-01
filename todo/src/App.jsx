@@ -31,6 +31,8 @@ export default class App extends Component {
 	    this.setState({
 		todoItems: [...this.state.todoItems,
 			    { action: task , done: false }],
+	    }, ()=>{
+		localStorage.setItem("todos", JSON.stringify(this.state))
 	    })
 	}
     }
@@ -49,7 +51,6 @@ export default class App extends Component {
 	})
     }
 
-
     todoTableRows = () => {
 	return this.state.todoItems.map( item =>{
 	    return (
@@ -65,8 +66,23 @@ export default class App extends Component {
 	)
 	return rows
     }
-    
-    render(){
+
+    componentDidMount = ()=>{
+	let data = localStorage.getItem("todos");
+	if(data == null){
+	    data = [
+		{ action: 'Buy Flowers', done: false },
+		{ action: 'Get Shoes', done: false },
+		{ action: 'Collect Tickets', done: true },
+		{ action: 'Call Joe', done: false },
+	    ]
+	}else{
+	    data = JSON.parse(data);
+	}
+	this.setState(data);
+    }
+
+    render = () => {
 	return (
 	    <div>
 		<TodoBanner name={this.state.userName} tasks={this.state.todoItems} />
