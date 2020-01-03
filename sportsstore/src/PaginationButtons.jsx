@@ -23,7 +23,7 @@ export class PaginationButtons extends React.Component{
 	return (
 	    <React.Fragment>
 		<button onClick={()=>navigate(current-1) }
-			diabled={ current === 1 }
+			disabled={ current === 1 }
 			className="btn btn-secondary mx-1">
 		    Previous
 		</button>
@@ -63,7 +63,7 @@ export class PaginationButtons extends React.Component{
 			)
 		}
 
-		<button onClick={ ()=>{ navigate(pageCount+1)} }
+		<button onClick={ ()=>{ navigate(current+1)} }
 			disabled={ current ===pageCount }
 			className="btn btn-secondary mx-1">
 		    Next

@@ -5,7 +5,15 @@ const cors = require("cors")
 const fileName = process.argv[2] || "./data.js"
 const port = process.argv[3] || 3001
 
+const fs = require("fs")
+const { buildSchema } = require("graphql")
+const graphqlHTTP = require("express-graphql")
+const queryResolvers = require("./serverQueriesResolver")
+const mutationResolvers = require("./serverMutationsResolver")
+const auth = require("./authMiddleware");
+
 let router = undefined;
+let graph = undefined;
 
 const app = express()
 
@@ -13,17 +21,29 @@ const createServer = ()=>{
     delete require.cache[require.resolve(fileName)]
     setTimeout(()=>{
 	router = jsonServer.router(fileName.endsWith(".js")?require(fileName)():fileName);
+
+	let schema = fs.readFileSync("./serverQueriesSchema.graphql", "utf-8")
+	    + fs.readFileSync("./serverMutationsSchema.graphql", "utf-8");
+	let resolvers = { ...queryResolvers, ...mutationResolvers};
+	graph = graphqlHTTP({
+	    schema: buildSchema(schema),
+	    rootValue: resolvers,
+	    graphiql: true,
+	    context: { db: router.db}
+	})
     },100)
 }
 
 createServer();
 
 app.use(cors());
-app.use(jsonServer.bodyParser)
+app.use(jsonServer.bodyParser);
+app.use(auth);
 app.use("/api", (req,resp,next)=>router(req,resp,next));
+app.use("/graphql", (req,resp,next)=>graph(req,resp,next));
 
 chokidar.watch(fileName).on("change", ()=>{
-    cosole.log("Reloading webservice data...");
+    console.log("Reloading webservice data...");
     createServer();
     console.log("Reloading web service data complete.");
 });

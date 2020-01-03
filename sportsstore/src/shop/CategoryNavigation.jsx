@@ -1,6 +1,7 @@
 import React from "react"
 //import  { Link } from "react-router-dom"
 import {ToggleLink} from "../ToggleLink"
+import { Link } from "react-router-dom";
 
 export class CategoryNavigation extends React.Component{
 
@@ -13,6 +14,10 @@ export class CategoryNavigation extends React.Component{
 			{cat}
 		    </ToggleLink>
 		)}
+		<Link className="btn btn-block btn-secondary fixed-bottom m-2 col-3"
+		      to="/admin">
+		    Administration
+		</Link>
 	    </React.Fragment>
 	)
     }
