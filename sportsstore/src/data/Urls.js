@@ -1,7 +1,8 @@
 import { DataTypes } from "./Types"
 
 const protocol = "http";
-const hostname = "192.168.56.1";
+//const hostname = "192.168.56.1";
+const hostname = "127.0.0.1";
 const port = 3001;
 
 export const RestUrls = {
